@@ -80,6 +80,8 @@ Configure in **Report → Settings** or **Popup → Settings** (opens report set
 
 API keys are stored in `chrome.storage.local`. **Test connection** validates the key; **Explain & Fix** runs the full provider flow (for Cursor, a cloud agent with streaming).
 
+**Cursor notes:** Explain requires a Cursor account with **Privacy Mode + storage** enabled (Legacy/Ghost mode will fail). Test connection only calls `GET /v1/me`. Cloud agents are slower than chat APIs; pick a valid model in Settings if the default (`composer-2`) is rejected.
+
 ---
 
 ## Tech stack
@@ -209,6 +211,7 @@ If any required PNG is missing, `npm run icons` generates purple placeholders �
 | `npm run icons` | Generate or validate `public/icons/` |
 | `npm run test` | Run Vitest unit tests |
 | `npm run test:watch` | Vitest watch mode |
+| `npm run preview` | Preview production build locally |
 | `npm run lint` | ESLint |
 | `npm run lint:fix` | ESLint with auto-fix |
 | `npm run format` | Prettier write |
