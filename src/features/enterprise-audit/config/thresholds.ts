@@ -1,0 +1,26 @@
+export const ENTERPRISE_AUDIT_THRESHOLDS = {
+  totalBlockingTimeMs: 200,
+  longTaskCount: 3,
+  domNodeCount: 1500,
+  domMaxDepth: 32,
+  totalTransferBytes: 3_000_000,
+  slowResourceCount: 3,
+  renderBlockingCount: 3,
+  largeImageBytes: 200_000,
+  missingLazyLoadRatio: 0.5,
+  titleMinLength: 10,
+  titleMaxLength: 60,
+  descriptionMinLength: 50,
+  descriptionMaxLength: 160,
+  thirdPartyRequestCount: 15,
+  cookieCount: 20,
+  storageBytes: 500_000,
+  scriptCount: 20,
+  stylesheetCount: 10,
+  fontFamilyCount: 8,
+  uncompressedResourceCount: 3,
+  tbtGoodMs: 200,
+  tbtPoorMs: 600,
+} as const;
+
+export const LIGHTHOUSE_DOCS_BASE = 'https://developer.chrome.com/docs/lighthouse';

@@ -1,0 +1,117 @@
+import { action, type FixStrategy } from '@features/fix-planner/strategies/shared';
+
+export const performanceStrategies: Record<string, FixStrategy> = {
+  'poor-lcp': (ctx) => [
+    action(ctx, {
+      id: `${ctx.issue.id}-identify-lcp`,
+      title: 'Identify LCP element and resource',
+      groupId: 'optimize-lcp',
+      implementationType: 'JavaScript',
+      manualVerification: true,
+      estimatedTime: '15 minutes',
+      complexity: 'Easy',
+    }),
+    action(ctx, {
+      id: `${ctx.issue.id}-convert-lcp-format`,
+      title: 'Convert LCP image to AVIF or WebP',
+      groupId: 'optimize-hero-images',
+      implementationType: 'Image Optimization',
+      estimatedImpact: 'Very High',
+      estimatedTime: '30 minutes',
+    }),
+    action(ctx, {
+      id: `${ctx.issue.id}-preload-lcp`,
+      title: 'Preload LCP image resource',
+      groupId: 'optimize-hero-images',
+      implementationType: 'HTML',
+      estimatedImpact: 'High',
+      dependsOn: [`${ctx.issue.id}-convert-lcp-format`],
+      estimatedTime: '15 minutes',
+      complexity: 'Easy',
+      requiresDeveloper: false,
+    }),
+    action(ctx, {
+      id: `${ctx.issue.id}-reduce-ttfb`,
+      title: 'Reduce document TTFB for LCP route',
+      groupId: 'optimize-lcp',
+      implementationType: 'Server Configuration',
+      estimatedImpact: 'High',
+      complexity: 'Hard',
+    }),
+  ],
+  'poor-cls': (ctx) => [
+    action(ctx, {
+      id: `${ctx.issue.id}-reserve-space`,
+      title: 'Reserve space for dynamic content and media',
+      groupId: 'stabilize-layout',
+      implementationType: 'CSS',
+      estimatedTime: '30 minutes',
+    }),
+    action(ctx, {
+      id: `${ctx.issue.id}-font-metrics`,
+      title: 'Set explicit dimensions and font fallbacks',
+      groupId: 'stabilize-layout',
+      implementationType: 'CSS',
+      estimatedTime: '30 minutes',
+    }),
+    action(ctx, {
+      id: `${ctx.issue.id}-defer-embeds`,
+      title: 'Defer non-critical embeds below the fold',
+      groupId: 'stabilize-layout',
+      implementationType: 'JavaScript',
+      estimatedTime: '1 hour',
+      complexity: 'Medium',
+    }),
+  ],
+  'poor-inp': (ctx) => [
+    action(ctx, {
+      id: `${ctx.issue.id}-split-tasks`,
+      title: 'Split long main-thread tasks',
+      groupId: 'improve-interactivity',
+      implementationType: 'JavaScript',
+      complexity: 'Hard',
+      estimatedTime: 'Several hours',
+    }),
+    action(ctx, {
+      id: `${ctx.issue.id}-defer-third-party`,
+      title: 'Defer non-critical third-party scripts',
+      groupId: 'improve-interactivity',
+      implementationType: 'JavaScript',
+      estimatedTime: '1 hour',
+    }),
+  ],
+  'poor-fcp': (ctx) => [
+    action(ctx, {
+      id: `${ctx.issue.id}-inline-critical`,
+      title: 'Inline critical above-the-fold CSS',
+      groupId: 'accelerate-first-paint',
+      implementationType: 'CSS',
+      estimatedTime: '1 hour',
+    }),
+    action(ctx, {
+      id: `${ctx.issue.id}-defer-render-blocking`,
+      title: 'Defer render-blocking stylesheets and scripts',
+      groupId: 'accelerate-first-paint',
+      implementationType: 'HTML',
+      estimatedTime: '30 minutes',
+    }),
+  ],
+  'poor-ttfb': (ctx) => [
+    action(ctx, {
+      id: `${ctx.issue.id}-cache-html`,
+      title: 'Enable HTML edge caching',
+      groupId: 'reduce-server-latency',
+      implementationType: 'Server Configuration',
+      complexity: 'Medium',
+      estimatedTime: '1 hour',
+    }),
+    action(ctx, {
+      id: `${ctx.issue.id}-cdn-origin`,
+      title: 'Route HTML through CDN origin shield',
+      groupId: 'reduce-server-latency',
+      implementationType: 'CDN',
+      complexity: 'Hard',
+      estimatedTime: 'Several hours',
+    }),
+  ],
+};

@@ -1,0 +1,189 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html,
+  body,
+  #root {
+    margin: 0;
+    min-height: 100%;
+    height: 100%;
+  }
+
+  body {
+    @apply bg-auditor-bg font-sans text-auditor-text text-sm leading-relaxed;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-auditor-accent ring-offset-2 ring-offset-auditor-bg;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-auditor-border/80;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-auditor-muted;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply border border-auditor-border-subtle bg-auditor-surface/90 shadow-glass backdrop-blur-glass;
+  }
+
+  .hero-panel {
+    @apply relative overflow-hidden rounded-2xl border border-auditor-border-subtle bg-gradient-to-br from-auditor-surface via-auditor-bg-elevated to-auditor-bg shadow-card;
+  }
+
+  .hero-panel::before {
+    content: '';
+    @apply pointer-events-none absolute inset-0;
+    background: linear-gradient(to bottom right, rgba(139, 92, 246, 0.08), transparent, transparent);
+  }
+
+  .metric-tile {
+    @apply rounded-xl border border-auditor-border-subtle bg-auditor-bg-elevated/60 p-4 transition-colors duration-fast hover:border-auditor-border hover:bg-auditor-surface-hover/40;
+  }
+
+  .scan-ring {
+    @apply relative flex items-center justify-center;
+  }
+
+  .scan-ring::before {
+    content: '';
+    @apply absolute inset-0 rounded-full border border-auditor-accent/30;
+    animation: pulseRing 2s ease-out infinite;
+  }
+
+  .nav-rail-btn {
+    @apply flex h-10 w-10 items-center justify-center rounded-xl text-auditor-muted-foreground transition-all duration-fast hover:bg-auditor-surface-hover hover:text-auditor-text focus-visible:ring-auditor-accent;
+  }
+
+  .nav-rail-btn-active {
+    @apply bg-auditor-accent-muted text-auditor-accent shadow-glow-sm;
+  }
+
+  .score-bar-track {
+    @apply h-2 overflow-hidden rounded-full bg-auditor-bg-elevated;
+  }
+
+  .score-bar-fill {
+    @apply h-full rounded-full bg-gradient-to-r from-auditor-accent-deep to-auditor-accent transition-all duration-slow;
+  }
+
+  .popup-cta {
+    @apply relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-auditor-accent-deep to-auditor-accent py-3.5 text-sm font-semibold text-white shadow-glow transition-transform duration-fast hover:scale-[1.01] hover:from-auditor-accent hover:to-auditor-accent-hover active:scale-[0.99] disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  .page-header {
+    @apply space-y-1 border-b border-auditor-border-subtle pb-5;
+  }
+
+  .page-title {
+    @apply text-xl font-semibold tracking-tight text-auditor-text;
+  }
+
+  .page-description {
+    @apply text-sm leading-relaxed text-auditor-muted;
+  }
+
+  .form-control {
+    @apply rounded-lg border border-auditor-border-subtle bg-auditor-bg px-3 py-2 text-xs text-auditor-text transition-colors duration-fast placeholder:text-auditor-muted focus:border-auditor-accent focus:outline-none focus:ring-1 focus:ring-auditor-accent/40;
+  }
+
+  .nav-link {
+    @apply flex items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-medium transition-colors duration-fast focus-visible:ring-auditor-accent;
+  }
+
+  .nav-link-active {
+    @apply bg-auditor-accent-muted text-auditor-text shadow-sm;
+  }
+
+  .nav-link-inactive {
+    @apply text-auditor-muted-foreground hover:bg-auditor-surface-hover hover:text-auditor-text;
+  }
+
+  .issue-card {
+    @apply border-l-2 border-l-transparent transition-shadow duration-fast hover:shadow-card;
+  }
+
+  .issue-card-critical {
+    @apply border-l-auditor-danger;
+  }
+
+  .issue-card-high {
+    @apply border-l-auditor-warning;
+  }
+
+  .data-table {
+    @apply w-full text-left text-xs;
+  }
+
+  .data-table caption {
+    @apply sr-only;
+  }
+
+  .data-table thead {
+    @apply border-b border-auditor-border-subtle bg-auditor-bg-elevated text-2xs uppercase tracking-wide text-auditor-muted;
+  }
+
+  .data-table th {
+    @apply px-3 py-2 font-medium;
+  }
+
+  .data-table tbody tr {
+    @apply border-b border-auditor-border-subtle/60 transition-colors duration-fast last:border-0 hover:bg-auditor-surface-hover/40;
+  }
+
+  .data-table td {
+    @apply px-3 py-2 align-top;
+  }
+
+  .data-table-sticky thead {
+    @apply sticky top-0 z-10;
+  }
+
+  .skeleton-shimmer {
+    background: linear-gradient(
+      90deg,
+      theme('colors.auditor.surface') 0%,
+      theme('colors.auditor.surface-hover') 50%,
+      theme('colors.auditor.surface') 100%
+    );
+    background-size: 200% 100%;
+    @apply animate-shimmer rounded-lg;
+  }
+}

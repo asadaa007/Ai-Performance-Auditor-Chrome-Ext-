@@ -1,0 +1,26 @@
+.report-shell {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.report-nav {
+  flex-shrink: 0;
+  z-index: 20;
+}
+
+.report-sidebar {
+  resize: horizontal;
+  overflow: hidden;
+  min-width: 200px;
+  max-width: 320px;
+}
+
+@media print {
+  .report-no-print {
+    display: none !important;
+  }
+
+  .report-print-area {
+    padding: 0;
+  }
+}
